@@ -53,8 +53,10 @@ app.locals.title = 'DNA Mutations API';
 
 const index = require('./routes/index');
 const dnaMutations=require('./routes/mutations')
+const stats=require('./routes/stats')
 app.use('/', index);
 app.use('/mutation', dnaMutations);
+app.use('/stats', stats)
 
 
 module.exports = app;
