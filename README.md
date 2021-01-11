@@ -7,7 +7,7 @@ You may send a DNA chain to the endpoint with the following format as a JSON obj
 
 "dna": ["ATGCGA","CAGTCA","TAGTTA","AGGAGA","GACTCA","TTATTT"]
 
-- Kindly note that only one register by dna is posible
+- Kindly note that only one register by dna is possible
 
 ### Environment Vars
 - PORT= local connection port
