@@ -25,7 +25,6 @@ describe("POST /mutation", () => {
     .post('/mutation')
     .send({dna: ["AGGCGA","CAGTGA","TAGTTA","AGGAGA","GACTCG","TCACTG"]})
     expect(res.status).to.equal(200)
-    console.log(res.text)
   });
 
   it("should return 403 status when less than 6 rows in the dna", async () => {
@@ -83,6 +82,14 @@ describe("POST /mutation", () => {
     .send({dna: ["ATGAAA","GAGGGA","TGATTA","AGGAGA","GACGTA","TCACTG"]})
     expect(res.text).to.equal("true")
   });
+
+  it("should not classify as mutation if there are no sequences of 4 same letters, columns or diagonals", async () => {
+    let res=await chai
+    .request(app)
+    .post('/mutation')
+    .send({dna: ["ATGCGA","CAGGCG","TATTTC","AGGAGA","GCGTCA","TCACTG"]})
+    expect(res.text).to.equal("false")
+  });
   
 
   afterEach(async () => {
@@ -90,6 +97,7 @@ describe("POST /mutation", () => {
     await Mutation.deleteOne({dna: ["ATAAAA","CAGGGG","TAGTTA","AGGTGA","GACTCA","TCACTG"]})
     await Mutation.deleteOne({dna: ["ATGAAA","GAGGGA","TGATTA","AGGAGT","GACGGA","TCACTG"]})
     await Mutation.deleteOne({dna: ["ATGAAA","CAGGGA","TAGTTA","AGGTGA","GACTCA","TCACTG"]})
+    await Mutation.deleteOne({dna: ["ATGAAA","GAGGGA","TGATTA","AGGAGA","GACGTA","TCACTG"]})
 
 })
 });
