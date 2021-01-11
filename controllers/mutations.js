@@ -10,7 +10,42 @@ exports.verifMutation= async (req,res)=>{
     return res
     .status(403)
     .json({message:"That DNA has already been recorded"})
-  } else{
+  } 
+
+  if(dna.length!=6){
+    return res
+    .status(403)
+    .json({message:"There is something wrong with the number of dna chains, please try again"})
+  }
+  
+  let arrl=false
+  dna.forEach(i=>{
+    if(i.length!=6){
+      arrl=true
+     }
+  })
+
+  let wl=false
+  let acc=0
+  let narr=dna.join("").split("")
+  narr.forEach(l=>{
+    if(l=="A"||l=="C"||l=="G"||l=="T"){
+      acc++
+    }else{
+      acc=acc
+    }
+    if(acc!=narr.length){
+      wl=true
+    } else{
+      wl=false
+    }
+  })
+
+  if(arrl || wl){
+    return res
+    .status(403)
+    .json({message:"Please check you have 6 letters in each chain and that they are A, T, C or G"})
+  } else {
     const mutation = hasMutation(dna)
     await Mutation.create({
       dna,
@@ -20,7 +55,7 @@ exports.verifMutation= async (req,res)=>{
     .status(200)
     .json(dna)
   }
-
+    
   function hasMutation(dna){
   
     //Get frequencies of chars function
