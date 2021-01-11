@@ -98,6 +98,8 @@ describe("POST /mutation", () => {
     await Mutation.deleteOne({dna: ["ATGAAA","GAGGGA","TGATTA","AGGAGT","GACGGA","TCACTG"]})
     await Mutation.deleteOne({dna: ["ATGAAA","CAGGGA","TAGTTA","AGGTGA","GACTCA","TCACTG"]})
     await Mutation.deleteOne({dna: ["ATGAAA","GAGGGA","TGATTA","AGGAGA","GACGTA","TCACTG"]})
+    await Mutation.deleteOne({dna: ["ATGCGA","CAGGCG","TATTTC","AGGAGA","GCGTCA","TCACTG"]})
+
 
 })
 });
